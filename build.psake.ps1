@@ -10,7 +10,7 @@ Task Publish -depends Build, CreateGitHubRelease, PublishToGallery
 Task Analyze {
 
     $Results = Invoke-ScriptAnalyzer -Path $SrcRootDir -Recurse  -Settings $ScriptAnalyzerSettingsPath -Verbose:$VerbosePreference
-    $Results | Select RuleName, Severity, ScriptName, Line, Message | Format-List
+    $Results | Select-Object RuleName, Severity, ScriptName, Line, Message | Format-List
 
     switch ($ScriptAnalysisFailBuildOnSeverityLevel) {
 
@@ -135,7 +135,7 @@ Task UpdateDocumentation {
 
     }
 
-    $Functions = $ModuleInfo.ExportedCommands.Keys | % {"    - $($_) : $($_).md"}
+    $Functions = $ModuleInfo.ExportedCommands.Keys | ForEach-Object {"    - $($_) : $($_).md"}
 
     $Template = @"
 ---
