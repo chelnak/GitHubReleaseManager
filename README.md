@@ -1,15 +1,15 @@
 # GitHubReleaseMangaer
 
-A PowerShell module for automating GitHub Repository releases
+A PowerShell module for automating GitHub releases
 
 ## Usage
 
-### Set session information
+Set session information
 ```
 Set-GitHubSessionInformation -Repository MyRepository -Username user -APIKey xxxxxxxxxxxxxxxxxxx
 ```
 
-### Create a release with associated assets
+Create a release with associated assets
 ```
 $Asset @ {
     "Path" = ".\Release\MyRepositoryAsset.zip
