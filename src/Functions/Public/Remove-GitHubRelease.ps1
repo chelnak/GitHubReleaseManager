@@ -57,7 +57,7 @@ function Remove-GitHubRelease {
         }
         catch [Exception] {
 
-            throw $_
+            throw $_.Exception
 
         }
 

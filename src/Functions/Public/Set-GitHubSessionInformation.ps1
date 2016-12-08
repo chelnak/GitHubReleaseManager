@@ -65,7 +65,7 @@ function Set-GitHubSessionInformation {
 
     } catch {
 
-        throw $_
+        throw $_.Exception
 
     }
 

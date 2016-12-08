@@ -113,9 +113,26 @@ function Invoke-GitHubRestMethod {
         }
 
     }
-    catch [Exception]{
+    catch [System.Net.WebException]{
 
-        throw $_
+        <#
+        $Result = $_.Exception.Response.GetResponseStream()
+        $Reader = New-Object System.IO.StreamReader($result)
+        $Reader.BaseStream.Position = 0
+        $Reader.DiscardBufferedData()
+        $ResponseBody = $Reader.ReadToEnd()
+        #>
+
+        # --- If a WebException is caught get the calling function and append to the exception
+        $PSCallStack = Get-PSCallStack
+
+        throw "$($PSCallStack[1].Command) $($_)"
+
+    }
+    catch [Exception] {
+
+
+        throw $_.Exception.Message
 
     }
     finally {
