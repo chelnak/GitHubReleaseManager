@@ -36,7 +36,7 @@ $Asset = @{
 ```
 
 "Path" = ".\Release\TestRelease-0.1.0.zip"
-    "ContentType" = "application/zip"
+    "Content-Type" = "application/zip"
 }
 New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
 
