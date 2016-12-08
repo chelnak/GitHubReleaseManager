@@ -73,7 +73,7 @@
 Param (
 
     [Parameter()]
-    [ValidateSet("Build", "WorkingBuild", "Release", "Analyze", "UpdateModuleManifest", "UpdateDocumentation", "BumpVersion", "Test")]
+    [ValidateSet("Build", "WorkingBuild", "Release", "Analyze", "UpdateModuleManifest", "UpdateDocumentation", "BumpVersion", "Test", "Publish")]
     [String]$Task = "Build"
 
 )

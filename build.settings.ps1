@@ -51,4 +51,19 @@ Properties {
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $ScriptAnalyzerSettingsPath = "$PSScriptRoot\PSScriptAnalyzerSettings.psd1"
 
+# ----------------------- GitHubReleaseManager properties --------------------------------
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+    $GithubRepositoryName = $($ModuleName)
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+    $GitHubUsername = "chelnak"
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+    $GitHubAPIKey = "0ba16589ffa4732e767380595823b5a6d111f3fe"
+
+    # --- The branch that you want to publish the release from. By default this is the master branch
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+    $GitHubReleaseTarget = "master"
+
 }

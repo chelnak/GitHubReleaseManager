@@ -5,7 +5,7 @@
 Task Default -depends Build
 Task Build -depends Analyze, UpdateModuleManifest, UpdateDocumentation, StageFiles, CreateArtifact
 Task WorkingBuild -depends PreBuild, Build, PostBuild
-Task Publish -depends Build, CreateGitHubRelease, PublishToGallery
+Task Publish -depends Build, CreateGitHubRelease
 
 Task Analyze {
 
@@ -307,6 +307,22 @@ Task Test {
     }
 
     Pop-Location
+
+}
+
+Task CreateGitHubRelease {
+
+    Set-GitHubSessionInformation -Repository $GitHubRepositoryName -UserName $GitHubUsername -APIKey $GithubAPIKey | Out-Null
+
+    $CurrentModuleVersion = (Import-PowerShellDataFile -Path $ModuleManifestPath).ModuleVersion
+    $ArchiveName = "$($ModuleOutDir)-$($CurrentModuleVersion).zip"
+
+    $Asset = @{
+        "Path" = $ArchiveName
+        "Content-Type" = "application/zip"
+    }
+
+    New-GitHubRelease -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference | Out-Null
 
 }
 
