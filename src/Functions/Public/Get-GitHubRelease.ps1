@@ -1,10 +1,10 @@
 function Get-GitHubRelease {
 <#
     .SYNOPSIS
-    Get a list of releases for a SessionInfo.Repository
+    Get a list of releases for a Repository
 
     .DESCRIPTION
-    Get a list of releases for a SessionInfo.Repository
+    Get a list of releases for a Repository
 
     .PARAMETER Id
     The id of the release
@@ -104,7 +104,7 @@ function Get-GitHubRelease {
     }
     catch [Exception]{
 
-        throw $_
+        throw $_.Exception
 
     }
 

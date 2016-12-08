@@ -1,7 +1,7 @@
 # Get-GitHubRelease
 
 ## SYNOPSIS
-Get a list of releases for a SessionInfo.Repository
+Get a list of releases for a Repository
 
 ## SYNTAX
 
@@ -26,7 +26,7 @@ Get-GitHubRelease [-latest]
 ```
 
 ## DESCRIPTION
-Get a list of releases for a SessionInfo.Repository
+Get a list of releases for a Repository
 
 ## EXAMPLES
 
