@@ -61,9 +61,9 @@ Properties {
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubUsername = "chelnak"
 
-    # --- Example token - relpace with your own.
+    # --- Personal Access Token. Store your token in a file called .gittoken in the root of the repository
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-    $GitHubAPIKey = "0ba16589ffa4732e767380595823b5a6d111f3fe"
+    $GitHubAPIKey = (Get-Content -Path "$($PSScriptRoot)\.gittoken" -Raw)
 
     # --- The branch that you want to publish the release from. By default this is the master branch.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]

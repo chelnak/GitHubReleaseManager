@@ -153,7 +153,6 @@ $($Functions -join "`r`n")
 
 Task StageFiles {
 
-
     $ModuleOutDir = "$($OutDir)\$($ModuleName)"
 
     if ((Test-Path -LiteralPath $ModuleOutDir)) {
@@ -312,24 +311,29 @@ Task Test {
 
 Task CreateGitHubRelease {
 
-    Set-GitHubSessionInformation -Repository $GitHubRepositoryName -UserName $GitHubUsername -APIKey $GithubAPIKey | Out-Null
+    Set-GitHubSessionInformation -Repository $GitHubRepositoryName -UserName $GitHubUsername -APIKey $GithubAPIKey -Verbose:$VerbosePreference | Out-Null
 
     $CurrentModuleVersion = (Import-PowerShellDataFile -Path $ModuleManifestPath).ModuleVersion
-    $ArchiveName = "$($ModuleOutDir)-$($CurrentModuleVersion).zip"
+
+    Write-Verbose -Message "Current module version is $($CurrentModuleVersion)"
+
+    $AssetPath = "$($OutDir)\$($ModuleName)-$($CurrentModuleVersion).zip"
+
+    Write-Verbose -Message "Asset path is $($AssetPath)"
 
     $Asset = @{
-        "Path" = $ArchiveName
+        "Path" = $AssetPath
         "Content-Type" = "application/zip"
     }
 
-    New-GitHubRelease -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference | Out-Null
+    New-GitHubRelease -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference -Confirm:$false | Out-Null
 
 }
 
 # --- Tasks included in WorkingBuild
 Task PreBuild {
 
-    Remove-Module -Name $ModuleName -Force -Verbose:$VerbosePrefernce
+    Remove-Module -Name $ModuleName -Force -ErrorAction SilentlyContinue -Verbose:$VerbosePreference
 
 }
 
