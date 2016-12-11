@@ -31,7 +31,7 @@ function Invoke-GitHubRestMethod {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Invoke-OTSRestMethod -Method POST -URI /v1/generate?passphrase=1234"
+    Invoke-GitHubRestMethod -Method POST -URI /api/release/1
 
 #>
 [CmdletBinding(DefaultParameterSetName="Standard")][OutputType('System.Management.Automation.PSObject')]
