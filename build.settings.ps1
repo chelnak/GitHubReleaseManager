@@ -53,16 +53,19 @@ Properties {
 
 # ----------------------- GitHubReleaseManager properties --------------------------------
 
+    # --- The name of the repository. This will be set to the modules name by default.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GithubRepositoryName = $($ModuleName)
 
+    # --- The owner of the repository.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubUsername = "chelnak"
 
+    # --- Example token - relpace with your own.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubAPIKey = "0ba16589ffa4732e767380595823b5a6d111f3fe"
 
-    # --- The branch that you want to publish the release from. By default this is the master branch
+    # --- The branch that you want to publish the release from. By default this is the master branch.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubReleaseTarget = "master"
 
