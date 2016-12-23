@@ -1,4 +1,4 @@
-#Requires -Modules Psake, Pester, PSScriptAnalyzer, PlatyPS
+#Requires -Modules Psake, Pester, PSScriptAnalyzer, PlatyPS, GitHubReleaseManager
 #Requires -Version 5
 
 <#
@@ -12,6 +12,7 @@
     - Pester
     - PSScriptAnalyzer
     - PlatyPS
+    - GitHubReleaseManager
 
     Each task in build.psake.ps1 relies on settings provided in build.settings.ps1
 
@@ -21,17 +22,11 @@
     The build task that needs to be executed. The value of this parameter can be:
 
     - Build
-    - WorkingBuild
     - Release
     - Analyze
     - UpdateModuleManifest
     - UpdateDocumentation
     - BumpVersion
-    - Test
-
-    The default value is Build which will execute the following tasks: Analyze, UpdateModuleManifest, UpdateDocumentation
-
-    Chosing release will execute the following tasks: All tasks in Build, Test, BumpVersion.
 
     The BumpVersion will increment the version of the Module Manifest based on the $BumpVersion setting provided in build.settings.ps1.
     By default this is patch.
@@ -46,10 +41,10 @@
     .\build.ps1
 
     .EXAMPLE
-    .\build.ps1 -Task WorkingBuild
+    .\build.ps1 -Task Build -Version PATCH
 
     .Example
-    .\build.ps1 -Task Release
+    .\build.ps1 -Task Publish
 
     .Example
     .\build.ps1 -Task Analyze
@@ -63,9 +58,6 @@
     .Example
     .\build.ps1 -Task BumpVersion
 
-    .Example
-    .\build.ps1 -Task Test
-
 #>
 
 [Cmdletbinding()]
@@ -73,8 +65,8 @@
 Param (
 
     [Parameter()]
-    [ValidateSet("Build", "WorkingBuild", "Release", "Analyze", "UpdateModuleManifest", "UpdateDocumentation", "BumpVersion", "Test", "Publish")]
-    [String]$Task = "Build",
+    [ValidateSet("Build", "Publish", "Analyze", "UpdateModuleManifest", "UpdateDocumentation", "BumpVersion", "Default")]
+    [String]$Task = "Default",
 
     [Parameter()]
     [ValidateSet("PATCH", "MINOR", "MAJOR")]
