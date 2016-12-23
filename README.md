@@ -16,7 +16,7 @@ Once you have your token open PowerShell follow these steps:
 * Set session information
 
 ```
-Set-GitHubSessionInformation -Repository MyRepository -Username user -APIKey xxxxxxxxxxxxxxxxxxx
+Set-GitHubSessionInformation -Username user -APIKey xxxxxxxxxxxxxxxxxxx
 ```
 
 * Create a release with associated assets
@@ -27,7 +27,7 @@ $Asset @ {
     "Content-Type" = "application/zip"
 }
 
-New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
+New-GitHubRelease -Repository TestRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
 
 ```
 
@@ -36,17 +36,22 @@ The module can also be used with PSake. Here is an example build task:
 ```
 Task CreateGitHubRelease {
 
-    Set-GitHubSessionInformation -Repository $GitHubRepositoryName -UserName $GitHubUsername -APIKey $GithubAPIKey | Out-Null
+    Set-GitHubSessionInformation -UserName $GitHubUsername -APIKey $GithubAPIKey -Verbose:$VerbosePreference | Out-Null
 
     $CurrentModuleVersion = (Import-PowerShellDataFile -Path $ModuleManifestPath).ModuleVersion
-    $AssetPath = "$($ModuleOutDir)-$($CurrentModuleVersion).zip"
+
+    Write-Verbose -Message "Current module version is $($CurrentModuleVersion)"
+
+    $AssetPath = "$($OutDir)\$($ModuleName)-$($CurrentModuleVersion).zip"
+
+    Write-Verbose -Message "Asset path is $($AssetPath)"
 
     $Asset = @{
         "Path" = $AssetPath
         "Content-Type" = "application/zip"
     }
 
-    New-GitHubRelease -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference | Out-Null
+    New-GitHubRelease -Repository $GithubRepositoryName -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference -Confirm:$false | Out-Null
 
 }
 ```
