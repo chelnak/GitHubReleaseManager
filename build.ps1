@@ -74,11 +74,15 @@ Param (
 
     [Parameter()]
     [ValidateSet("Build", "WorkingBuild", "Release", "Analyze", "UpdateModuleManifest", "UpdateDocumentation", "BumpVersion", "Test", "Publish")]
-    [String]$Task = "Build"
+    [String]$Task = "Build",
+
+    [Parameter()]
+    [ValidateSet("PATCH", "MINOR", "MAJOR")]
+    [String]$Version
 
 )
 
 # --- Start Build
-Invoke-psake -buildFile "$($PSScriptRoot)\build.psake.ps1" -taskList $Task -nologo -Verbose:$VerbosePreference
+Invoke-psake -buildFile "$($PSScriptRoot)\build.psake.ps1" -taskList $Task  -parameters @{"Version"=$Version} -nologo -Verbose:$VerbosePreference
 
 exit ( [int]( -not $psake.build_success ) )

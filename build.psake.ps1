@@ -2,10 +2,9 @@
 . $PSScriptRoot\build.settings.ps1
 
 # --- Define the build tasks
-Task Default -depends Build
-Task Build -depends Analyze, UpdateModuleManifest, UpdateDocumentation, StageFiles, CreateArtifact
-Task WorkingBuild -depends PreBuild, Build, PostBuild
-Task Publish -depends Build, CreateGitHubRelease
+Task Default -depends Analyze, UpdateModuleManifest, UpdateDocumentation
+Task Build -depends Analyze, BumpVersion, UpdateModuleManifest, UpdateDocumentation, StageFiles, CreateArtifact
+Task Publish -depends CreateGitHubRelease, PublishModuleToGallery
 
 Task Analyze {
 
@@ -238,7 +237,7 @@ Task BumpVersion {
 
     switch ($BumpVersion) {
 
-        'Major' {
+        'MAJOR' {
 
             Write-Verbose -Message "Bumping module major release number"
 
@@ -250,7 +249,7 @@ Task BumpVersion {
 
         }
 
-        'Minor' {
+        'MINOR' {
 
             Write-Verbose -Message "Bumping module minor release number"
 
@@ -261,7 +260,7 @@ Task BumpVersion {
 
         }
 
-        'Patch' {
+        'PATCH' {
 
             Write-Verbose -Message "Bumping module patch release number"
 
@@ -270,48 +269,38 @@ Task BumpVersion {
             break
         }
 
+        default {
+
+            Write-Verbose -Message "Not bumping module version"
+            break
+
+        }
+
     }
 
     # --- Build the new version string
     $ModuleVersion = "$($MajorVersion).$($MinorVersion).$($PatchVersion)"
 
-    if ($ModuleVersion -gt $CurrentModuleVersion) {
+    if ([version]$ModuleVersion -gt [version]$CurrentModuleVersion) {
 
         # --- Fix taken from: https://github.com/RamblingCookieMonster/BuildHelpers/blob/master/BuildHelpers/Public/Step-ModuleVersion.ps1
         New-ModuleManifest -Path $ModuleManifestPath -ModuleVersion $ModuleVersion @ModuleManifest -Verbose:$VerbosePreference
         Write-Verbose -Message "Module version updated to $($ModuleVersion)"
 
-    }
-
-}
-
-Task Test {
-
-    Push-Location -LiteralPath $TestDirectory
-
-    $ResultsFile = "$($TestDirectory)\data\PesterResults-$(Get-date -uformat "%Y%m%d-%H%M%S").xml"
-    $Results = Invoke-Pester -PassThru -OutputFormat NUnitXml -OutputFile $($ResultsFile)
-
-    if ($ENV:APPVEYOR){
-
-        $WC = New-Object 'System.Net.WebClient'
-        $WC.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($ENV:APPVEYOR_JOB_ID)", (Resolve-Path $ResultsFile))
+        # --- Update appveyor build version
+        $AppveyorYMLPath = "$($PSScriptRoot)\appveyor.yml"
+        $AppveyorVersion = "$($ModuleVersion).{build}"
+        $NewAppveyorYML = Get-Content -Path $AppveyorYMLPath | ForEach-Object { $_ -replace '^version: .+$', "version: $($AppveyorVersion)";}
+        $NewAppveyorYML | Set-Content -Path $AppveyorYMLPath -Force
+        Write-Verbose -Message "Appveyor build version set to $($AppveyorVersion)"
 
     }
-
-    if($Results.FailedCount -gt 0) {
-
-        Write-Error -Message "Pester Tests Failed. See $($ResultsFile) for more information"
-
-    }
-
-    Pop-Location
 
 }
 
 Task CreateGitHubRelease {
 
-    Set-GitHubSessionInformation -Repository $GitHubRepositoryName -UserName $GitHubUsername -APIKey $GithubAPIKey -Verbose:$VerbosePreference | Out-Null
+    Set-GitHubSessionInformation -UserName $GitHubUsername -APIKey $GithubAPIKey -Verbose:$VerbosePreference | Out-Null
 
     $CurrentModuleVersion = (Import-PowerShellDataFile -Path $ModuleManifestPath).ModuleVersion
 
@@ -326,19 +315,12 @@ Task CreateGitHubRelease {
         "Content-Type" = "application/zip"
     }
 
-    New-GitHubRelease -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference -Confirm:$false | Out-Null
+    New-GitHubRelease -Repository $GithubRepositoryName -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference -Confirm:$false | Out-Null
 
 }
 
-# --- Tasks included in WorkingBuild
-Task PreBuild {
+Task PublushModuleToGallery {
 
-    Remove-Module -Name $ModuleName -Force -ErrorAction SilentlyContinue -Verbose:$VerbosePreference
-
-}
-
-Task PostBuild {
-
-    Import-Module "$($PSScriptRoot)\Release\$($ModuleName)\$($ModuleName).psm1"
+    # --- Not implemented
 
 }
