@@ -1,7 +1,6 @@
-$Private = Get-ChildItem -Path "$($PSScriptRoot)\Functions\Private\*.ps1" -Verbose:$VerbosePreference
 $Public = Get-ChildItem -Path "$($PSScriptRoot)\Functions\Public\*.ps1" -Verbose:$VerbosePreference
 
-foreach($Function in @($Public + $Private)) {
+foreach($Function in $Public) {
 
     try {
 
