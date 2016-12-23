@@ -6,7 +6,7 @@ Remove a release
 ## SYNTAX
 
 ```
-Remove-GitHubRelease [-Id] <String[]> [-WhatIf] [-Confirm]
+Remove-GitHubRelease [-Repository] <String> [-Id] <String[]> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -16,15 +16,25 @@ Remove a release
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Remove-GitHubRelease -Id 12345
-```
-
-### -------------------------- EXAMPLE 2 --------------------------
-```
-Get-GitHubRelease -Id 12345 | Remove-GitHubRelease
+Remove-GitHubRelease -Repository MyRepository -Id 12345
 ```
 
 ## PARAMETERS
+
+### -Repository
+The name of the repository
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 The Id of the release to remove
@@ -35,7 +45,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

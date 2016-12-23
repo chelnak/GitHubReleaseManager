@@ -7,22 +7,22 @@ Get a list of releases for a Repository
 
 ### Standard (Default)
 ```
-Get-GitHubRelease [-Page <Int32>] [-PerPage <Int32>]
+Get-GitHubRelease -Repository <String> [-Page <Int32>] [-PerPage <Int32>]
 ```
 
 ### ById
 ```
-Get-GitHubRelease -Id <String>
+Get-GitHubRelease -Repository <String> -Id <String>
 ```
 
 ### ByTagName
 ```
-Get-GitHubRelease -Tag <String>
+Get-GitHubRelease -Repository <String> -Tag <String>
 ```
 
 ### Latest
 ```
-Get-GitHubRelease [-latest]
+Get-GitHubRelease -Repository <String> [-latest]
 ```
 
 ## DESCRIPTION
@@ -37,20 +37,35 @@ Get-GitHubRelease
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-GitHubRelease -Id xxxxx
+Get-GitHubRelease -Repository MyRepository -Id xxxxx
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-GitHubRelease -Tag v.1.0
+Get-GitHubRelease -Repository MyRepository -Tag v.1.0
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-GitHubRelease -Latest
+Get-GitHubRelease -Repository MyRepository -Latest
 ```
 
 ## PARAMETERS
+
+### -Repository
+The name of the repository
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 The id of the release

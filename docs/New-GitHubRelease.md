@@ -6,8 +6,8 @@ Create a new release for a repository
 ## SYNTAX
 
 ```
-New-GitHubRelease [-Name] <String> [[-Description] <String>] [[-Target] <String>] [-Tag] <String>
- [-Assets] <Hashtable[]> [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
+New-GitHubRelease [-Repository] <String> [-Name] <String> [[-Description] <String>] [[-Target] <String>]
+ [-Tag] <String> [-Assets] <Hashtable[]> [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -17,17 +17,17 @@ Create a new release for a repository
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0
+New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Draft
+New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Draft
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Prerelease
+New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Prerelease
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
@@ -38,9 +38,24 @@ $Asset = @{
 "Path" = ".\Release\TestRelease-0.1.0.zip"
     "Content-Type" = "application/zip"
 }
-New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
+New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
 
 ## PARAMETERS
+
+### -Repository
+The name of the repository
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Name
 The name of the release
@@ -51,7 +66,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,7 +81,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -84,7 +99,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -99,7 +114,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -130,7 +145,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 5
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

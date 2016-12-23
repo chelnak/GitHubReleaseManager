@@ -6,8 +6,7 @@ Create information for this session
 ## SYNTAX
 
 ```
-Set-GitHubSessionInformation [-Repository] <String> [-Username] <String> [-APIKey] <String> [-WhatIf]
- [-Confirm]
+Set-GitHubSessionInformation [-Username] <String> [-APIKey] <String> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -17,25 +16,10 @@ Create information for this session
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Set-GitHubSessionInformation -Repository TestRepo -Username user -APIKey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Set-GitHubSessionInformation -Username user -APIKey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ## PARAMETERS
-
-### -Repository
-The repository to manage
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Username
 The username that has priveleges to manage the repository
