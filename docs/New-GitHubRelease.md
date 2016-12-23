@@ -7,7 +7,7 @@ Create a new release for a repository
 
 ```
 New-GitHubRelease [-Repository] <String> [-Name] <String> [[-Description] <String>] [[-Target] <String>]
- [-Tag] <String> [-Assets] <Hashtable[]> [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
+ [-Tag] <String> [[-Assets] <Hashtable[]>] [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -144,7 +144,7 @@ Type: Hashtable[]
 Parameter Sets: (All)
 Aliases: 
 
-Required: True
+Required: False
 Position: 6
 Default value: None
 Accept pipeline input: False

@@ -97,7 +97,7 @@ function New-GitHubRelease {
         [ValidateNotNullOrEmpty()]
         [String]$Tag,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [Hashtable[]]$Assets,
 
