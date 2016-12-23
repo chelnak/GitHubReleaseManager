@@ -6,6 +6,9 @@ function Get-GitHubRelease {
     .DESCRIPTION
     Get a list of releases for a Repository
 
+    .PARAMETER Repository
+    The name of the repository
+
     .PARAMETER Id
     The id of the release
 
@@ -27,18 +30,22 @@ function Get-GitHubRelease {
     Get-GitHubRelease
 
     .EXAMPLE
-    Get-GitHubRelease -Id xxxxx
+    Get-GitHubRelease -Repository MyRepository -Id xxxxx
 
     .EXAMPLE
-    Get-GitHubRelease -Tag v.1.0
+    Get-GitHubRelease -Repository MyRepository -Tag v.1.0
 
     .EXAMPLE
-    Get-GitHubRelease -Latest
+    Get-GitHubRelease -Repository MyRepository -Latest
 
 #>
 [CmdletBinding(DefaultParameterSetName="Standard")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Repository,
 
         [Parameter(Mandatory=$true, ParameterSetName="ById")]
         [ValidateNotNullOrEmpty()]
@@ -71,29 +78,29 @@ function Get-GitHubRelease {
 
             "Standard" {
 
-                Write-Verbose -Message "Retrieving all releases for Repository $($SessionInfo.Repository)"
-                $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases?page=$($page)&per_page=$($PerPage)"
+                Write-Verbose -Message "Retrieving all releases for Repository $($Repository)"
+                $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases?page=$($page)&per_page=$($PerPage)"
                 break
             }
 
             "ById" {
 
-                Write-Verbose -Message "Retrieving release $($Id) for $($SessionInfo.Repository)"
-                $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases/$($Id)"
+                Write-Verbose -Message "Retrieving release $($Id) for $($Repository)"
+                $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases/$($Id)"
                 break
             }
 
             "ByTagName" {
 
-                Write-Verbose -Message "Retrieving release with tag $($Tag) for Repository $($SessionInfo.Repository)"
-                $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases/tags/$($Tag)"
+                Write-Verbose -Message "Retrieving release with tag $($Tag) for Repository $($Repository)"
+                $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases/tags/$($Tag)"
                 break
             }
 
             "Latest" {
 
-                Write-Verbose -Message "Retrieving latest release for Repository $($SessionInfo.Repository)"
-                $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases/latest"
+                Write-Verbose -Message "Retrieving latest release for Repository $($Repository)"
+                $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases/latest"
                 break
             }
 

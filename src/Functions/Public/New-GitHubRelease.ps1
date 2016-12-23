@@ -6,6 +6,9 @@ function New-GitHubRelease {
     .DESCRIPTION
     Create a new release for a repository
 
+    .PARAMETER Repository
+    The name of the repository
+
     .PARAMETER Name
     The name of the release
 
@@ -53,26 +56,30 @@ function New-GitHubRelease {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0
+    New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0
 
     .EXAMPLE
-    New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Draft
+    New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Draft
 
     .EXAMPLE
-    New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Prerelease
+    New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Prerelease
 
     .EXAMPLE
     $Asset = @{
         "Path" = ".\Release\TestRelease-0.1.0.zip"
         "Content-Type" = "application/zip"
     }
-    New-GitHubRelease -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
+    New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
 
 
 #>
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Repository,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
@@ -120,9 +127,9 @@ function New-GitHubRelease {
 
         }
 
-        $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases"
+        $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases"
 
-        if ($PSCmdlet.ShouldProcess($SessionInfo.Repository)) {
+        if ($PSCmdlet.ShouldProcess($Repository)) {
 
             # --- Create the release
             $Response = Invoke-GitHubRestMethod -Method POST -URI $URI -Body ($Body | ConvertTo-JSON) -Verbose:$VerbosePreference
@@ -144,7 +151,7 @@ function New-GitHubRelease {
 
                     # --- Execute Request
                     $ResolvedAsset = Get-Item -LiteralPath $Path
-                    $UploadURI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases/$($Response.id)/assets?name=$($ResolvedAsset.Name)"
+                    $UploadURI = "/repos/$($SessionInfo.Username)/$($Repository)/releases/$($Response.id)/assets?name=$($ResolvedAsset.Name)"
                     Write-Verbose -Message "Uploading asset $($ResolvedAsset.FullName)"
                     Invoke-GitHubRestMethod -Method POST -URI $UploadURI -InFile $ResolvedAsset.FullName -ContentType $ContentType -Verbose:$VerbosePreference | Out-Null
 

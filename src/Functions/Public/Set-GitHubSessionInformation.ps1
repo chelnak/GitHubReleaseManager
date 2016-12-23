@@ -6,9 +6,6 @@ function Set-GitHubSessionInformation {
     .DESCRIPTION
     Create information for this session
 
-    .PARAMETER Repository
-    The repository to manage
-
     .PARAMETER Username
     The username that has priveleges to manage the repository
 
@@ -22,16 +19,12 @@ function Set-GitHubSessionInformation {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Set-GitHubSessionInformation -Repository TestRepo -Username user -APIKey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    Set-GitHubSessionInformation -Username user -APIKey xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 #>
 [CmdletBinding(SupportsShouldProcess,ConfirmImpact="Low")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
-
-        [Parameter(Mandatory=$true, Position=0)]
-        [ValidateNotNullOrEmpty()]
-        [String]$Repository,
 
         [Parameter(Mandatory=$true, Position=1)]
         [ValidateNotNullOrEmpty()]
@@ -49,7 +42,6 @@ function Set-GitHubSessionInformation {
 
     $GithubSessionInformation = [PSCustomObject]@{
 
-        Repository = $Repository
         Username = $Username
         Authorization = [System.Convert]::ToBase64String($EncodedAuth)
 

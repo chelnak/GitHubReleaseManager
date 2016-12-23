@@ -6,6 +6,9 @@ function Remove-GitHubRelease {
     .DESCRIPTION
     Remove a release
 
+    .PARAMETER Repository
+    The name of the repository
+
     .PARAMETER Id
     The Id of the release to remove
 
@@ -16,15 +19,16 @@ function Remove-GitHubRelease {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Remove-GitHubRelease -Id 12345
-
-    .EXAMPLE
-    Get-GitHubRelease -Id 12345 | Remove-GitHubRelease
+    Remove-GitHubRelease -Repository MyRepository -Id 12345
 
 #>
 [CmdletBinding(SupportsShouldProcess,ConfirmImpact="High")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Repository,
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNullOrEmpty()]
@@ -45,9 +49,9 @@ function Remove-GitHubRelease {
 
             foreach ($ReleaseId in $Id) {
 
-                if ($PSCmdlet.ShouldProcess($SessionInfo.Repository)){
+                if ($PSCmdlet.ShouldProcess($Repository)){
 
-                    $URI = "/repos/$($SessionInfo.Username)/$($SessionInfo.Repository)/releases/$($ReleaseId)"
+                    $URI = "/repos/$($SessionInfo.Username)/$($Repository)/releases/$($ReleaseId)"
                     Invoke-GitHubRestMethod -Method DELETE -URI $URI -Verbose:$VerbosePreference
 
                 }
