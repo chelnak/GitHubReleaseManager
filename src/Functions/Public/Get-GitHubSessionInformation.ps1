@@ -22,14 +22,12 @@ function Get-GitHubSessionInformation {
 
     Write-Verbose -Message "Retrieving GithubSessionInformation"
 
-    $SessionInfo = $PSCmdlet.GetVariableValue("GitHubSessionInformation")
-
-    if (!$SessionInfo) {
+    if (!$Script:GitHubSessionInformation) {
 
         throw "The GithubSessionInformation does not exist. Run Set-GitHubSessionInformation first!"
 
     }
 
-    Write-Output $SessionInfo
+    Write-Output $Script:GitHubSessionInformation
 
 }

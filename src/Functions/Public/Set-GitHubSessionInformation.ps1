@@ -38,20 +38,18 @@ function Set-GitHubSessionInformation {
 
     Write-Verbose -Message "Creating new SessionState variable GithubSessionInformation"
 
-    $EncodedAuth = [System.Text.Encoding]::UTF8.GetBytes("$($Username):$($APIKey)")
-
-    $GithubSessionInformation = [PSCustomObject]@{
-
-        Username = $Username
-        Authorization = [System.Convert]::ToBase64String($EncodedAuth)
-
-    }
-
     try {
 
         if ($PSCmdlet.ShouldProcess("GithubSessionInformation")){
 
-            $PSCmdlet.SessionState.PSVariable.Set("GithubSessionInformation", $GithubSessionInformation)
+            $EncodedAuth = [System.Text.Encoding]::UTF8.GetBytes("$($Username):$($APIKey)")
+
+            $Script:GithubSessionInformation = [PSCustomObject]@{
+
+                Username = $Username
+                Authorization = [System.Convert]::ToBase64String($EncodedAuth)
+
+            }
 
         }
 
@@ -61,6 +59,6 @@ function Set-GitHubSessionInformation {
 
     }
 
-    Write-Output $GithubSessionInformation
+    Write-Output $Script:GithubSessionInformation
 
 }
