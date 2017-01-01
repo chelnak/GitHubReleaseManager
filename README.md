@@ -2,6 +2,11 @@
 
 A PowerShell module for automating GitHub releases
 
+## PowerShell Edition Support
+
+* **Desktop**: 5.x
+* **Core**: v6.0.0-alpha.14
+
 ## Usage
 
 Before you start you'll need to create a Personal Access Token with the following scopes:
