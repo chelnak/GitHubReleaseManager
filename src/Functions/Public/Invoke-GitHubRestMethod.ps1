@@ -18,6 +18,9 @@ function Invoke-GitHubRestMethod {
     .PARAMETER InFile
     The File to upload
 
+    .PARAMETER OutFile
+    Path to downloaded file
+
     .PARAMETER ContentType
     The content type of the file to upload
 
@@ -58,6 +61,10 @@ function Invoke-GitHubRestMethod {
         [ValidateNotNullOrEmpty()]
         [String]$ContentType,
 
+        [Parameter(Mandatory=$false, ParameterSetName="OutFile")]
+        [ValidateNotNullOrEmpty()]
+        [String]$OutFile,
+
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [System.Collections.IDictionary]$Headers
@@ -84,33 +91,36 @@ function Invoke-GitHubRestMethod {
 
     try {
 
+        $Params = @{
 
-        switch ($PSCmdlet.ParameterSetName) {
-
-            'WithBody' {
-
-                $Response = Invoke-RestMethod -Method $Method -Headers $Headers -Uri $FullURI -Body $Body -Verbose:$VerbosePrefernce
-                break
-
-            }
-
-            'Infile' {
-
-                $UploadURI = "https://uploads.github.com"
-                $FullURI = "$($UploadURI)$($URI)"
-                $Response = Invoke-WebRequest -Method $Method -Uri $FullURI -Headers $Headers -InFile $InFile -ContentType $ContentType -Verbose:$VerbosePreference
-                break
-
-            }
-
-            default {
-
-                $Response = Invoke-RestMethod -Method $Method -Headers $Headers -Uri $FullURI -Verbose:$VerbosePreference
-                break
-
-            }
+            Method = $Method
+            Headers = $Headers
+            Uri = $FullURI
 
         }
+
+        if ($PSBoundParameters.ContainsKey("Body")) {
+
+            $Params.Add("Body", $Body)
+
+        }
+
+        if ($PSBoundParameters.ContainsKey("OutFile")) {
+
+            $Params.Add("OutFile", $OutFile)
+
+        }
+
+        if ($PSBoundParameters.ContainsKey("InFile")) {
+
+            $UploadURI = "https://uploads.github.com"
+            $Params.Uri = "$($UploadURI)$($URI)"
+            $Params.Add("InFile", $InFile)
+            $Params.Add("ContentType", $ContentType)
+
+        }
+
+        $Response = Invoke-RestMethod @Params -Verbose:$VerbosePreference
 
     }
     catch [System.Net.WebException]{
@@ -126,8 +136,12 @@ function Invoke-GitHubRestMethod {
     }
     finally {
 
-        $ServicePoint = [System.Net.ServicePointManager]::FindServicePoint($FullURI)
-        $ServicePoint.CloseConnectionGroup("") | Out-Null
+        if ($PSVersionTable.PSEdition -eq "Desktop") {
+
+            $ServicePoint = [System.Net.ServicePointManager]::FindServicePoint($FullURI)
+            $ServicePoint.CloseConnectionGroup("") | Out-Null
+
+        }
 
     }
 

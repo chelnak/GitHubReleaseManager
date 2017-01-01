@@ -21,6 +21,11 @@ Invoke-GitHubRestMethod -Method <String> -URI <String> [-InFile <String>] [-Cont
  [-Headers <IDictionary>]
 ```
 
+### OutFile
+```
+Invoke-GitHubRestMethod -Method <String> -URI <String> [-OutFile <String>] [-Headers <IDictionary>]
+```
+
 ## DESCRIPTION
 A module specific wrapper for Invoke-ResetMethod
 
@@ -99,6 +104,21 @@ The content type of the file to upload
 ```yaml
 Type: String
 Parameter Sets: InFile
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OutFile
+Path to downloaded file
+
+```yaml
+Type: String
+Parameter Sets: OutFile
 Aliases: 
 
 Required: False
