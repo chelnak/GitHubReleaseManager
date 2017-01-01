@@ -321,6 +321,6 @@ Task CreateGitHubRelease {
 
 Task PublishPSGallery {
 
-    Publish-Module -Path "$($OutDir)\$($ModuleName)" -NuGetApiKey $PowerShellGalleryAPiKey -Verbose:$VerbosePreference
+    Publish-Module -Path "$($OutDir)\$($ModuleName)" -NuGetApiKey $NuGetAPIKey -Verbose:$VerbosePreference
 
 }
