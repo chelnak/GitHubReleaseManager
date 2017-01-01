@@ -10,7 +10,7 @@ if (!$SuppressImportModule) {
 }
 
 $RepositoryName = "TestRepository"
-$Username = "chenak"
+$Username = "chelnak"
 $APIKey = Get-Content -Path ..\.gittoken -Raw
 
 $ReleaseName = "TestRelease-$(Get-Random -Maximum 50)"
