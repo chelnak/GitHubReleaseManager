@@ -62,7 +62,7 @@ Properties {
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubReleaseTarget = "master"
 
-# ----------------------- GitHubReleaseManager properties --------------------------------
+# ----------------------- PowerShell Gallery properties --------------------------------
 
       # --- PowerShell Gallery APIKey. Store your token in a file called .nugetapikey in the root of the repository
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
