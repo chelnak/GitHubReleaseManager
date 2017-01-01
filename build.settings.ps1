@@ -66,7 +66,7 @@ Properties {
 
       # --- PowerShell Gallery APIKey. Store your token in a file called .nugetapikey in the root of the repository
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-    $GitHubAPIKey = (Get-Content -Path "$($PSScriptRoot)\.nugetapikey" -Raw)
+    $NuGetAPIKey = (Get-Content -Path "$($PSScriptRoot)\.nugetapikey" -Raw)
 
 # ----------------------- VersioningSettings properties --------------------------------
 
