@@ -4,7 +4,7 @@
 # --- Define the build tasks
 Task Default -depends Analyze, UpdateModuleManifest, UpdateDocumentation
 Task Build -depends Analyze, BumpVersion, UpdateModuleManifest, UpdateDocumentation, StageFiles, CreateArtifact
-Task Publish -depends CreateGitHubRelease
+Task Publish -depends CreateGitHubRelease, PublishPSGallery
 
 Task Analyze {
 
@@ -316,5 +316,11 @@ Task CreateGitHubRelease {
     }
 
     New-GitHubRelease -Repository $GithubRepositoryName -Name $ModuleName -Target $GitHubReleaseTarget -Tag "v$($CurrentModuleVersion)" -Assets $Asset -Verbose:$VerbosePreference -Confirm:$false | Out-Null
+
+}
+
+Task PublishPSGallery {
+
+    Publish-Module -Path "$($OutDir)\$($ModuleName)" -NuGetApiKey $PowerShellGalleryAPiKey -Verbose:$VerbosePreference
 
 }

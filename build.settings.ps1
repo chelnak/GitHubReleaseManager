@@ -62,11 +62,16 @@ Properties {
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $GitHubReleaseTarget = "master"
 
+# ----------------------- GitHubReleaseManager properties --------------------------------
+
+      # --- PowerShell Gallery APIKey. Store your token in a file called .nugetapikey in the root of the repository
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+    $GitHubAPIKey = (Get-Content -Path "$($PSScriptRoot)\.nugetapikey" -Raw)
+
 # ----------------------- VersioningSettings properties --------------------------------
 
     # --- $Version is a parameter from build.ps1
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
     $BumpVersion = $Version
-
 
 }

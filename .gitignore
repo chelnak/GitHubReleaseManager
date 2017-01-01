@@ -1,5 +1,6 @@
 # Files
 .gittoken
+.nugetapikey
 
 # Folders
 Release/
