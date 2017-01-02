@@ -26,11 +26,11 @@ function Set-GitHubSessionInformation {
 
     Param (
 
-        [Parameter(Mandatory=$true, Position=1)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
         [String]$Username,
 
-        [Parameter(Mandatory=$true, Position=2)]
+        [Parameter(Mandatory=$true, Position=1)]
         [ValidateNotNullOrEmpty()]
         [String]$APIKey
 

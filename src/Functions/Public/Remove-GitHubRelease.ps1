@@ -26,11 +26,11 @@ function Remove-GitHubRelease {
 
     Param (
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
         [String]$Repository,
 
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, Position=1, ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNullOrEmpty()]
         [String[]]$Id
 

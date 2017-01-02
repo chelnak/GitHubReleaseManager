@@ -77,35 +77,35 @@ function New-GitHubRelease {
 
     Param (
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
         [String]$Repository,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=1)]
         [ValidateNotNullOrEmpty()]
         [String]$Name,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=2)]
         [ValidateNotNullOrEmpty()]
         [String]$Description,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=3)]
         [ValidateNotNullOrEmpty()]
         [String]$Target,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=4)]
         [ValidateNotNullOrEmpty()]
         [String]$Tag,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=5)]
         [ValidateNotNullOrEmpty()]
         [Hashtable[]]$Assets,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=6)]
         [ValidateNotNullOrEmpty()]
         [Switch]$Draft,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=7)]
         [ValidateNotNullOrEmpty()]
         [Switch]$Prerelease
 

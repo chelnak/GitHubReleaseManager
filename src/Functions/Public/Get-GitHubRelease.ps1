@@ -43,27 +43,27 @@ function Get-GitHubRelease {
 
     Param (
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateNotNullOrEmpty()]
         [String]$Repository,
 
-        [Parameter(Mandatory=$true, ParameterSetName="ById")]
+        [Parameter(Mandatory=$true, Position=1, ParameterSetName="ById")]
         [ValidateNotNullOrEmpty()]
         [String]$Id,
 
-        [Parameter(Mandatory=$true, ParameterSetName="ByTagName")]
+        [Parameter(Mandatory=$true, Position=2, ParameterSetName="ByTagName")]
         [ValidateNotNullOrEmpty()]
         [String]$Tag,
 
-        [Parameter(Mandatory=$true, ParameterSetName="Latest")]
+        [Parameter(Mandatory=$true, Position=3, ParameterSetName="Latest")]
         [ValidateNotNullOrEmpty()]
         [Switch]$latest,
 
-        [Parameter(Mandatory=$false, ParameterSetName="Standard")]
+        [Parameter(Mandatory=$false, Position=4, ParameterSetName="Standard")]
         [ValidateNotNullOrEmpty()]
         [Int]$Page = 1,
 
-        [Parameter(Mandatory=$false, ParameterSetName="Standard")]
+        [Parameter(Mandatory=$false, Position=5, ParameterSetName="Standard")]
         [ValidateNotNullOrEmpty()]
         [Int]$PerPage = 30
 

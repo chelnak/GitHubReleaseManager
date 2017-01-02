@@ -41,31 +41,31 @@ function Invoke-GitHubRestMethod {
 
     Param (
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateSet("HEAD","GET","POST","PUT","DELETE")]
         [String]$Method,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=1)]
         [ValidateNotNullOrEmpty()]
         [String]$URI,
 
-        [Parameter(Mandatory=$false, ParameterSetName="WithBody")]
+        [Parameter(Mandatory=$false, Position=2, ParameterSetName="WithBody")]
         [ValidateNotNullOrEmpty()]
         [String]$Body,
 
-        [Parameter(Mandatory=$false, ParameterSetName="InFile")]
+        [Parameter(Mandatory=$false, Position=3, ParameterSetName="InFile")]
         [ValidateNotNullOrEmpty()]
         [String]$InFile,
 
-        [Parameter(Mandatory=$false, ParameterSetName="InFile")]
+        [Parameter(Mandatory=$false, Position=4, ParameterSetName="InFile")]
         [ValidateNotNullOrEmpty()]
         [String]$ContentType,
 
-        [Parameter(Mandatory=$false, ParameterSetName="OutFile")]
+        [Parameter(Mandatory=$false, Position=5, ParameterSetName="OutFile")]
         [ValidateNotNullOrEmpty()]
         [String]$OutFile,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$false, Position=6)]
         [ValidateNotNullOrEmpty()]
         [System.Collections.IDictionary]$Headers
 
