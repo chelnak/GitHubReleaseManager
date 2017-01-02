@@ -160,7 +160,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: Named
+Position: 7
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -175,7 +175,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: Named
+Position: 8
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False

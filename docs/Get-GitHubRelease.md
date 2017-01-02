@@ -7,22 +7,22 @@ Get a list of releases for a Repository
 
 ### Standard (Default)
 ```
-Get-GitHubRelease -Repository <String> [-Page <Int32>] [-PerPage <Int32>]
+Get-GitHubRelease [-Repository] <String> [[-Page] <Int32>] [[-PerPage] <Int32>]
 ```
 
 ### ById
 ```
-Get-GitHubRelease -Repository <String> -Id <String>
+Get-GitHubRelease [-Repository] <String> [-Id] <String>
 ```
 
 ### ByTagName
 ```
-Get-GitHubRelease -Repository <String> -Tag <String>
+Get-GitHubRelease [-Repository] <String> [-Tag] <String>
 ```
 
 ### Latest
 ```
-Get-GitHubRelease -Repository <String> [-latest]
+Get-GitHubRelease [-Repository] <String> [-latest]
 ```
 
 ## DESCRIPTION
@@ -61,7 +61,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -76,7 +76,7 @@ Parameter Sets: ById
 Aliases: 
 
 Required: True
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -91,7 +91,7 @@ Parameter Sets: ByTagName
 Aliases: 
 
 Required: True
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -106,7 +106,7 @@ Parameter Sets: Latest
 Aliases: 
 
 Required: True
-Position: Named
+Position: 4
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -121,7 +121,7 @@ Parameter Sets: Standard
 Aliases: 
 
 Required: False
-Position: Named
+Position: 5
 Default value: 1
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -136,7 +136,7 @@ Parameter Sets: Standard
 Aliases: 
 
 Required: False
-Position: Named
+Position: 6
 Default value: 30
 Accept pipeline input: False
 Accept wildcard characters: False

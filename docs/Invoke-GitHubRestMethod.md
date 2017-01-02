@@ -7,23 +7,23 @@ A module specific wrapper for Invoke-ResetMethod
 
 ### Standard (Default)
 ```
-Invoke-GitHubRestMethod -Method <String> -URI <String> [-Headers <IDictionary>]
+Invoke-GitHubRestMethod [-Method] <String> [-URI] <String> [[-Headers] <IDictionary>]
 ```
 
 ### WithBody
 ```
-Invoke-GitHubRestMethod -Method <String> -URI <String> [-Body <String>] [-Headers <IDictionary>]
+Invoke-GitHubRestMethod [-Method] <String> [-URI] <String> [[-Body] <String>] [[-Headers] <IDictionary>]
 ```
 
 ### InFile
 ```
-Invoke-GitHubRestMethod -Method <String> -URI <String> [-InFile <String>] [-ContentType <String>]
- [-Headers <IDictionary>]
+Invoke-GitHubRestMethod [-Method] <String> [-URI] <String> [[-InFile] <String>] [[-ContentType] <String>]
+ [[-Headers] <IDictionary>]
 ```
 
 ### OutFile
 ```
-Invoke-GitHubRestMethod -Method <String> -URI <String> [-OutFile <String>] [-Headers <IDictionary>]
+Invoke-GitHubRestMethod [-Method] <String> [-URI] <String> [[-OutFile] <String>] [[-Headers] <IDictionary>]
 ```
 
 ## DESCRIPTION
@@ -47,7 +47,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,7 +62,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -77,7 +77,7 @@ Parameter Sets: WithBody
 Aliases: 
 
 Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -92,7 +92,7 @@ Parameter Sets: InFile
 Aliases: 
 
 Required: False
-Position: Named
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -107,7 +107,7 @@ Parameter Sets: InFile
 Aliases: 
 
 Required: False
-Position: Named
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -122,7 +122,7 @@ Parameter Sets: OutFile
 Aliases: 
 
 Required: False
-Position: Named
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -138,7 +138,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: Named
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
