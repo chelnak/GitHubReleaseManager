@@ -22,7 +22,7 @@ Get-GitHubRelease [-Repository] <String> [-Tag] <String>
 
 ### Latest
 ```
-Get-GitHubRelease [-Repository] <String> [-latest]
+Get-GitHubRelease [-Repository] <String> [-Latest]
 ```
 
 ## DESCRIPTION
@@ -32,7 +32,7 @@ Get a list of releases for a Repository
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-GitHubRelease
+Get-GitHubRelease -Repository MyRepository
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
@@ -97,7 +97,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -latest
+### -Latest
 Retrieve the latest release
 
 ```yaml
@@ -113,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Page
-{{Fill Page Description}}
+The page number to return
 
 ```yaml
 Type: Int32
@@ -128,7 +128,7 @@ Accept wildcard characters: False
 ```
 
 ### -PerPage
-{{Fill PerPage Description}}
+The number of entries per page
 
 ```yaml
 Type: Int32

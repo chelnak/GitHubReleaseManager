@@ -7,7 +7,7 @@ Create a new release for a repository
 
 ```
 New-GitHubRelease [-Repository] <String> [-Name] <String> [[-Description] <String>] [[-Target] <String>]
- [-Tag] <String> [[-Assets] <Hashtable[]>] [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
+ [-Tag] <String> [[-Asset] <Hashtable[]>] [-Draft] [-Prerelease] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -38,7 +38,7 @@ $Asset = @{
 "Path" = ".\Release\TestRelease-0.1.0.zip"
     "Content-Type" = "application/zip"
 }
-New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Assets $Asset
+New-GitHubRelease -Repository MyRepository -Name TestRelease -Description "Test v1.0 release" -Target master -Tag v1.0 -Asset $Asset
 
 ## PARAMETERS
 
@@ -120,7 +120,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Assets
+### -Asset
 An array of Assets to upload with the release.
 
 An asset should be in the form of a hashtable and must contain the following keys:
@@ -216,6 +216,7 @@ Accept wildcard characters: False
 
 ### System.String
 Switch
+Hashtable
 
 ## OUTPUTS
 
