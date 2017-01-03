@@ -63,7 +63,7 @@ function Get-GitHubRelease {
 
         [Parameter(Mandatory=$true, Position=3, ParameterSetName="Latest")]
         [ValidateNotNullOrEmpty()]
-        [Switch]$latest,
+        [Switch]$Latest,
 
         [Parameter(Mandatory=$false, Position=4, ParameterSetName="Standard")]
         [ValidateNotNullOrEmpty()]
