@@ -18,6 +18,12 @@ function Get-GitHubRelease {
     .PARAMETER Latest
     Retrieve the latest release
 
+    .PARAMETER Page
+    The page number to return
+
+    .PARAMETER PerPage
+    The number of entries per page
+
     .INPUTS
     System.String
     System.Int
@@ -27,7 +33,7 @@ function Get-GitHubRelease {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Get-GitHubRelease
+    Get-GitHubRelease -Repository MyRepository
 
     .EXAMPLE
     Get-GitHubRelease -Repository MyRepository -Id xxxxx
