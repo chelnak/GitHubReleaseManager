@@ -42,7 +42,7 @@ function Invoke-GitHubRestMethod {
     Param (
 
         [Parameter(Mandatory=$true, Position=0)]
-        [ValidateSet("HEAD","GET","POST","PUT","DELETE")]
+        [ValidateSet("HEAD","GET","POST","PUT","DELETE", "PATCH")]
         [String]$Method,
 
         [Parameter(Mandatory=$true, Position=1)]
