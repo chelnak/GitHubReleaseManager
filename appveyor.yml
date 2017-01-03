@@ -4,6 +4,11 @@ branches:
   - master
 image: WMF 5
 build: off
+environment:
+  GitToken:
+    secure: Zp+1OaziEY3qRLb2m0fodp+pmezszMM4aE5ZcXcWJgMcAOa5gxjdVNWKT5Ve3xt4
+  NugetAPIKey:
+    secure: g/oJpBtSPY2iV9FeothbxDMD+j11wA7ZHLrHLcd54mKhRzyEOcABk2+BKA1pU8ul
 init:
   - ps: Install-PackageProvider NuGet -Force | Out-Null
 install:
