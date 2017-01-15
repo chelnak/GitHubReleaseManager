@@ -62,7 +62,7 @@ function Set-GitHubReleaseAsset {
         $SessionInfo = Get-GitHubSessionInformation -Verbose:$VerbosePreference
 
         $Body = [PSCustomObject] @{
-            Name = $Name
+            name = $Name
         }
 
         if ($PSBoundParameters.ContainsKey("Label")){
