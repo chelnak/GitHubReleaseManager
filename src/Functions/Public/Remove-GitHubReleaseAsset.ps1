@@ -19,10 +19,10 @@ function Remove-GitHubReleaseAsset {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Rempve-GitHubReleaseAsset -Repository MyRepository -Id xxxx
+    Remove-GitHubReleaseAsset -Repository MyRepository -Id xxxx
 
 #>
-[CmdletBinding(SupportsShouldProcess,ConfirmImpact="Low")][OutputType('System.Management.Automation.PSObject')]
+[CmdletBinding(SupportsShouldProcess,ConfirmImpact="High")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
 
