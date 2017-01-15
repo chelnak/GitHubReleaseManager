@@ -16,9 +16,3 @@ foreach($Function in $Public) {
 }
 
 Export-ModuleMember -Function $($Public | Select-Object -ExpandProperty BaseName) -Verbose:$VerbosePreference
-
-$ExecutionContext.SessionState.Module.OnRemove = {
-
-    Remove-Variable -Name GitHubSessionInformation -Force -ErrorAction SilentlyContinue
-
-}
