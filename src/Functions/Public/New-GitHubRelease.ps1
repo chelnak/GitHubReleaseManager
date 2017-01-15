@@ -136,19 +136,19 @@ function New-GitHubRelease {
             $Response = Invoke-GitHubRestMethod -Method POST -URI $URI -Body ($Body | ConvertTo-JSON) -Verbose:$VerbosePreference
 
             # --- If the Assets parameter is passed upload each file
-            if ($PSBoundParameters.ContainsKey("Assets")) {
+            if ($PSBoundParameters.ContainsKey("Asset")) {
 
-                foreach ($Asset in $Assets) {
+                foreach ($Item in $Asset) {
 
-                    if (!($Asset.ContainsKey("Path") -and $Asset.ContainsKey("Content-Type"))) {
+                    if (!($Item.ContainsKey("Path") -and $Item.ContainsKey("Content-Type"))) {
 
                         throw "The Assets parameter is not correct. See function help for more information."
 
                     }
 
                     # --- Retrieve parameters from hashtable
-                    $Path = $Asset.Get_Item("Path")
-                    $ContentType = $Asset.Get_Item("Content-Type")
+                    $Path = $Item.Get_Item("Path")
+                    $ContentType = $Item.Get_Item("Content-Type")
 
                     # --- Execute Request
                     $ResolvedAsset = Get-Item -LiteralPath $Path
