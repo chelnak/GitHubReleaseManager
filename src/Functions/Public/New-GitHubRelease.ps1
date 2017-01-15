@@ -104,11 +104,11 @@ function New-GitHubRelease {
 
         [Parameter(Mandatory=$false, Position=6)]
         [ValidateNotNullOrEmpty()]
-        [Switch]$Draft,
+        [System.Management.Automation.SwitchParameter]$Draft,
 
         [Parameter(Mandatory=$false, Position=7)]
         [ValidateNotNullOrEmpty()]
-        [Switch]$Prerelease
+        [System.Management.Automation.SwitchParameter]$Prerelease
 
     )
 
