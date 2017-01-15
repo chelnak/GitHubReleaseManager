@@ -1,55 +1,25 @@
-# Remove-GitHubReleaseAsset
+# Remove-GitHubSessionInformation
 
 ## SYNOPSIS
-Remove an asset from a release
+Remove session variables from the current session
 
 ## SYNTAX
 
 ```
-Remove-GitHubReleaseAsset [-Repository] <String> [-Id] <String[]> [-WhatIf] [-Confirm]
+Remove-GitHubSessionInformation [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-Remove an asset from a release
+Remove session variables from the current session
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Remove-GitHubReleaseAsset -Repository MyRepository -Id xxxx
+Remove-GitHubSessionInformation
 ```
 
 ## PARAMETERS
-
-### -Repository
-The name of the repository
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-The id of the asset
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
@@ -84,11 +54,11 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### System.String
+### None
 
 ## OUTPUTS
 
-### System.Management.Automation.PSObject
+### None
 
 ## NOTES
 
