@@ -1,6 +1,7 @@
 # Files
 .gittoken
 .nugetapikey
+debug.ps1
 
 # Folders
 Release/
