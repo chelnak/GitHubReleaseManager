@@ -61,7 +61,6 @@ function Set-GitHubReleaseAsset {
         # --- Grab the sessionstate variable & test throw if it is null
         $SessionInfo = Get-GitHubSessionInformation -Verbose:$VerbosePreference
 
-
         $Body = [PSCustomObject] @{
             Name = $Name
         }
