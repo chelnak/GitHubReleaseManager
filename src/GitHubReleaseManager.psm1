@@ -14,5 +14,5 @@ foreach($Function in $Public) {
     }
 
 }
-
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 # GitHub requires TLS version 1.2
 Export-ModuleMember -Function $($Public | Select-Object -ExpandProperty BaseName) -Verbose:$VerbosePreference
