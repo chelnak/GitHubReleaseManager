@@ -159,6 +159,8 @@ function New-GitHubRelease {
                 }
 
             }
+            
+            Write-Output $Response
 
         }
 
